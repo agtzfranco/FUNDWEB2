@@ -1,69 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora Básica</title>
-    <link rel="stylesheet" href="estilos.css">
-</head>
-<body>
-    <H1>Operaciones con dos números</H1>
-    <form action="" class="formulario" name="form">
-        <label for="num1">Número 1</label>
-        <input type="number" id="num1" name="num1"><br><br>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title> 
+    </head>
+    <body>
+        <div id="listado">
 
-        <label for="num2">Número 2</label>
-        <input type="number" id="num2" name="num2"><br><br>
-
-        <button type="button" onclick="calcular('sumar')">Sumar</button>
-        <button type="button" onclick="calcular('restar')">Restar</button>
-        <button type="button" onclick="calcular('multiplicar')">Multiplicar</button>
-        <button type="button" onclick="calcular('dividir')">Dividir</button>
-        
-        <br><br>
-        <p id="resultado">Resultado: </p>
-    </form>
-    <script>
-        function calcular(operacion) {
-            var num1 = parseFloat(document.getElementById("num1").value);
-            var num2 = parseFloat(document.getElementById("num2").value);
-
-            if (isNaN(num1) || isNaN(num2)) {
-                document.getElementById("resultado").textContent = "Por favor, ingrese números válidos.";
-                return;
-            }
-
-            var resultado;
-            var operador;
-
-            switch(operacion) {
-                case 'sumar':
-                    resultado = num1 + num2;
-                    operador = " + ";
-                    break;
-                case 'restar':
-                    resultado = num1 - num2;
-                    operador = " - ";
-                    break;
-                case 'multiplicar':
-                    resultado = num1 * num2;
-                    operador = " × ";
-                    break;
-                case 'dividir':
-                    if(num2 === 0) {
-                        document.getElementById("resultado").textContent = "Error: No se puede dividir por cero";
-                        return;
-                    }
-                    resultado = num1 / num2;
-                    operador = " ÷ ";
-                    break;
-                default:
-                    resultado = "Operación no válida";
-            }
-
-            document.getElementById("resultado").textContent = 
-                "Resultado: " + num1 + operador + num2 + " = " + resultado;
-        }
-    </script>
-</body>
+        </div>
+        <script>
+            lista=[ {
+                "nombre": "Juan Pérez",
+                "edad": 30,
+                "ciudad": "Monterrey"
+                },
+                {
+                "nombre": "María García",
+                "edad": 25,
+                "ciudad": "Guadalajara"
+                },
+                {
+                "nombre": "Carlos López",
+                "edad": 35,
+                "ciudad": "Ciudad de México"
+                }
+            ]
+            localStorage.setItem("datos", JSON.stringify(lista));
+            lst=localStorage.getItem("datos");
+            lst=JSON.parse(localStorage.getItem("datos"))
+            console.log(typeof(lst));
+            lst.forEach(element=>{
+                let elements=document.getElementById("listado");
+                let div=document.createElement("div");
+                div.innerHTML=element.nombre + " - " + element.edad + " - " + element.ciudad;
+                elements.appendChild(div);
+            });
+        </script>
+    </body>
 </html>
